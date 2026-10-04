@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrustDesk AI | Support Operations</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <nav class="glass sticky top-0 z-50 border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+            <div class="bg-indigo-600 p-2 rounded-lg">
+                <i class="fas fa-shield-halved text-white text-xl"></i>
+            </div>
+            <h1 class="text-xl font-bold tracking-tight text-slate-900">TrustDesk <span class="text-indigo-600">AI</span></h1>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="text-sm font-medium text-slate-500">Operator: <span class="text-slate-900">Admin User</span></span>
+            <div class="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold">A</div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto p-6 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        <!-- Left Column -->
+        <div class="lg:col-span-5 space-y-6">
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-lg font-semibold mb-4 flex items-center gap-2">
+                    <i class="fas fa-ticket-alt text-indigo-500"></i> New Ticket
+                </h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Ticket ID</label>
+                        <input id="ticketId" type="text" placeholder="TKT-101" class="w-full px-4 py-2 rounded-lg border border-slate-300 outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-slate-600 mb-1">Issue Description</label>
+                        <textarea id="issueDesc" rows="4" placeholder="Describe the issue..." class="w-full px-4 py-2 rounded-lg border border-slate-300 outline-none"></textarea>
+                    </div>
+                    <div class="flex gap-3">
+                        <button onclick="runTriage()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2 rounded-lg">Triage</button>
+                        <button onclick="runEvaluation()" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 rounded-lg">Evaluate</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="triageSection" class="hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-lg font-semibold mb-4">Triage Result</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Category</p>
+                        <p id="triageCat" class="text-lg font-semibold">-</p>
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <p class="text-xs text-slate-500 uppercase font-bold">Priority</p>
+                        <p id="triagePri" class="text-lg font-semibold">-</p>
+                    </div>
+                </div>
+                <div id="escalationBadge" class="mt-4 hidden">
+                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-red-100 text-red-700">
+                        <i class="fas fa-exclamation-triangle mr-1"></i> Escalation Needed
+                    </span>
+                </div>
+            </section>
+        </div>
+
+        <!-- Right Column -->
+        <div class="lg:col-span-7 space-y-6">
+            <section id="evalSection" class="hidden bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-lg font-semibold">AI Evaluation</h2>
+                    <span id="evalStatus" class="text-xs font-medium px-2 py-1 rounded bg-slate-100 text-slate-600">Processing...</span>
+                </div>
+                <div class="space-y-6">
+                    <div>
+                        <p class="text-sm font-medium text-slate-600 mb-2">Proposed Decision</p>
+                        <div id="proposedDecision" class="p-4 bg-indigo-50 text-indigo-900 font-semibold rounded-xl border border-indigo-100"> - </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-600 mb-2">Draft Reply</p>
+                        <div id="draftReply" class="p-4 bg-slate-50 text-slate-700 rounded-xl border border-slate-200 whitespace-pre-wrap italic"> - </div>
+                    </div>
+                    <div>
+                        <p class="text-sm font-medium text-slate-600 mb-2">Reasoning</p>
+                        <p id="reasoning" class="text-sm text-slate-600">-</p>
+                    </div>
+                    <div id="reviewAction" class="hidden p-6 bg-amber-50 rounded-2xl border border-amber-200">
+                        <h3 class="text-amber-800 font-bold mb-3">Human Approval Required</h3>
+                        <div class="space-y-4">
+                            <textarea id="reviewerNotes" rows="2" class="w-full px-3 py-2 rounded-lg border border-amber-300 outline-none bg-white" placeholder="Notes..."></textarea>
+                            <div class="flex gap-3">
+                                <button onclick="submitReview(true)" class="flex-1 bg-green-600 text-white font-bold py-2 rounded-lg">Approve</button>
+                                <button onclick="submitReview(false)" class="flex-1 bg-red-600 text-white font-bold py-2 rounded-lg">Reject</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <h2 class="text-lg font-semibold mb-4">Pending Approvals</h2>
+                <div id="pendingList" class="space-y-3">
+                    <p class="text-sm text-slate-400 italic">No pending approvals found.</p>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // FIXED: Use absolute URL to avoid path doubling errors
+        const BASE_URL = 'http://localhost:8083/api/v1/agent';
+        const CONV_ID = 'web-user-' + Math.random().toString(36).substring(7);
+
+        async function apiCall(endpoint, method = 'GET', body = null) {
+            console.log(`Calling: ${endpoint} [${method}]`);
+            const options = {
+                method,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Conversation-Id': CONV_ID
+                }
+            };
+            if (body) options.body = JSON.stringify(body);
+
+            try {
+                const res = await fetch(endpoint, options);
+                if (!res.ok) {
+                    const errText = await res.text();
+                    throw new Error(`Server Error (${res.status}): ${errText}`);
+                }
+                return await res.json();
+            } catch (e) {
+                console.error("API call failed:", e);
+                throw e;
+            }
+        }
+
+        async function runTriage() {
+            const id = document.getElementById('ticketId').value;
+            const desc = document.getElementById('issueDesc').value;
+            if (!id || !desc) return alert('Please enter Ticket ID and Description');
+
+            try {
+                const result = await apiCall(`${BASE_URL}/triage`, 'POST', { ticketId: id, issueDescription: desc });
+                document.getElementById('triageSection').classList.remove('hidden');
+                document.getElementById('triageCat').innerText = result.category || 'N/A';
+                document.getElementById('triagePri').innerText = result.priority || 'N/A';
+                document.getElementById('escalationBadge').classList.toggle('hidden', !result.escalationNeeded);
+            } catch (e) { alert(e.message); }
+        }
+
+        async function runEvaluation() {
+            const id = document.getElementById('ticketId').value;
+            const desc = document.getElementById('issueDesc').value;
+            if (!id || !desc) return alert('Please enter Ticket ID and Description');
+
+            try {
+                document.getElementById('evalSection').classList.remove('hidden');
+                document.getElementById('evalStatus').innerText = 'Processing...';
+
+                const result = await apiCall(`${BASE_URL}/evaluate-ticket`, 'POST', { ticketId: id, issueDescription: desc });
+
+                document.getElementById('evalStatus').innerText = 'Completed';
+                document.getElementById('proposedDecision').innerText = result.decision || 'N/A';
+                document.getElementById('draftReply').innerText = result.draftReply || 'No draft generated.';
+                document.getElementById('reasoning').innerText = result.reasoning || 'N/A';
+                document.getElementById('reviewAction').classList.toggle('hidden', !result.requiresHumanApproval);
+            } catch (e) {
+                alert(e.message);
+                document.getElementById('evalStatus').innerText = 'Failed';
+            }
+        }
+
+        async function submitReview(approved) {
+            const id = document.getElementById('ticketId').value;
+            const notes = document.getElementById('reviewerNotes').value;
+            if (!id) return alert('No ticket selected');
+
+            try {
+                await apiCall(`${BASE_URL}/tickets/${id}/human-review`, 'POST', {
+                    approved: approved,
+                    overrideDecision: approved ? "" : "Overridden by operator",
+                    reviewerNotes: notes,
+                    idempotencyKey: 'idemp-' + Date.now()
+                });
+                alert('Review submitted successfully!');
+                document.getElementById('reviewAction').classList.add('hidden');
+                loadPending();
+            } catch (e) { alert(e.message); }
+        }
+
+        async function loadPending() {
+            try {
+                const list = await apiCall(`${BASE_URL}/pending-approvals`);
+                const container = document.getElementById('pendingList');
+                if (!list || list.length === 0) {
+                    container.innerHTML = '<p class="text-sm text-slate-400 italic">No pending approvals found.</p>';
+                    return;
+                }
+                container.innerHTML = list.map(t => `
+                    <div class="p-4 bg-white border border-slate-200 rounded-xl flex justify-between items-center">
+                        <div>
+                            <p class="font-bold">${t.ticketId}</p>
+                            <p class="text-xs text-slate-500 truncate w-48">${t.issueDescription}</p>
+                        </div>
+                        <button onclick="openTicket('${t.ticketId}')" class="text-xs bg-indigo-50 text-indigo-600 px-3 py-1 rounded-full font-semibold">Review</button>
+                    </div>
+                `).join('');
+            } catch (e) { console.error("Failed to load pending:", e); }
+        }
+
+        function openTicket(id) {
+            document.getElementById('ticketId').value = id;
+            alert('Ticket ' + id + ' loaded. Run Evaluation to see AI proposal.');
+        }
+
+        window.onload = loadPending;
+    </script>
+</body>
+</html>

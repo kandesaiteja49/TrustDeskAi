@@ -28,6 +28,9 @@ public class TicketEvaluationEntity {
 
     private boolean requiresHumanApproval;
     private String citedPolicyDoc;
+    @Column(columnDefinition = "TEXT")
+    private String draftReply;
+
 
     @Enumerated(EnumType.STRING)
     private TicketStatus status;
@@ -36,6 +39,8 @@ public class TicketEvaluationEntity {
     private String finalDecision;
     private LocalDateTime createdAt;
     private LocalDateTime reviewedAt;
+    private String lastIdempotencyKey;
+
 
     // Getters, Setters, Constructors...
 }

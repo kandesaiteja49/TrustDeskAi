@@ -7,16 +7,20 @@ public class HumanReviewRequestDto {
     private boolean approved;
     private String overrideDecision;
     private String reviewerNotes;
+    private String idempotencyKey;
+
 
     // Default constructor
     public HumanReviewRequestDto() {}
 
     // Parameterized constructor
-    public HumanReviewRequestDto(boolean approved, String overrideDecision, String reviewerNotes) {
+    public HumanReviewRequestDto(boolean approved, String overrideDecision, String reviewerNotes, String idempotencyKey) {
         this.approved = approved;
         this.overrideDecision = overrideDecision;
         this.reviewerNotes = reviewerNotes;
+        this.idempotencyKey = idempotencyKey;
     }
+
 
     // Getters and Setters
     public boolean isApproved() {
@@ -39,7 +43,11 @@ public class HumanReviewRequestDto {
         return reviewerNotes;
     }
 
-    public void setReviewerNotes(String reviewerNotes) {
-        this.reviewerNotes = reviewerNotes;
+    public String getIdempotencyKey() {
+        return idempotencyKey;
+    }
+
+    public void setIdempotencyKey(String idempotencyKey) {
+        this.idempotencyKey = idempotencyKey;
     }
 }

@@ -4,7 +4,6 @@ import com.demo.trustdeskAi.tools.OrderDetailsLookupTool;
 import com.demo.trustdeskAi.tools.PolicyLookupTool;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.MessageChatMemoryAdvisor;
-import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
 import org.springframework.ai.chat.memory.ChatMemory;
 import org.springframework.ai.chat.memory.MessageWindowChatMemory;
 import org.springframework.beans.factory.annotation.Value;
@@ -52,8 +51,7 @@ public class AgentConfig {
         return builder
                 .defaultSystem(guardrail)
                 .defaultAdvisors(
-                        MessageChatMemoryAdvisor.builder(chatMemory).build(),
-                        new SimpleLoggerAdvisor() // Logs full request & output reasoning JSON
+                        MessageChatMemoryAdvisor.builder(chatMemory).build()
                 )
                 .defaultTools(policyLookupTool,orderDetailsLookupTool)//mention the default tools here or all tools here comma seperated
                 .build();

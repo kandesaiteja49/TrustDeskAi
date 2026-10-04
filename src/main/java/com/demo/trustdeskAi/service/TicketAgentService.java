@@ -3,7 +3,10 @@ package com.demo.trustdeskAi.service;
 
 
 import com.demo.trustdeskAi.dtos.TicketEvaluationResultDto;
+import com.demo.trustdeskAi.dtos.TriageResultDto;
+import com.demo.trustdeskAi.enitities.AITraceEntity;
 import com.demo.trustdeskAi.enitities.TicketEvaluationEntity;
+import com.demo.trustdeskAi.repositories.AITraceRepository;
 import com.demo.trustdeskAi.repositories.TicketEvaluationRepository;
 import com.demo.trustdeskAi.utils.enums.TicketStatus;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +27,10 @@ import java.util.Objects;
 public class TicketAgentService {
 
     private final ChatClient chatClient;
-
-
     private final TicketEvaluationRepository ticketRepository;
+    private final AITraceRepository traceRepository;
+    private final GuardrailService guardrailService;
+
 
     // Inject the single pre-configured ChatClient instance
 //    public TicketAgentService(ChatClient chatClient) {
@@ -59,11 +63,17 @@ public class TicketAgentService {
     }
 
     @Transactional
-    public TicketEvaluationEntity processHumanReview(String ticketId, boolean approved, String overrideDecision, String reviewerNotes) {
+    public TicketEvaluationEntity processHumanReview(String ticketId, boolean approved, String overrideDecision, String reviewerNotes, String idempotencyKey) {
         log.info("Processing human review for ticket ID: {}. Approved: {}", ticketId, approved);
 
         TicketEvaluationEntity ticket = ticketRepository.findById(ticketId)
                 .orElseThrow(() -> new NoSuchElementException("Ticket not found with ID: " + ticketId));
+
+        // Idempotency Check
+        if (idempotencyKey != null && idempotencyKey.equals(ticket.getLastIdempotencyKey())) {
+            log.info("Duplicate request detected for ticket [{}] with idempotency key [{}]. Returning existing result.", ticketId, idempotencyKey);
+            return ticket;
+        }
 
         if (ticket.getStatus() != TicketStatus.PENDING_HUMAN_APPROVAL) {
             throw new IllegalStateException("Ticket " + ticketId + " is not pending human approval. Current status: " + ticket.getStatus());
@@ -85,21 +95,79 @@ public class TicketAgentService {
 
         ticket.setHumanReviewerNotes(reviewerNotes);
         ticket.setReviewedAt(LocalDateTime.now());
+        ticket.setLastIdempotencyKey(idempotencyKey);
 
         return ticketRepository.save(ticket);
+    }
+
+    @Transactional(readOnly = true)
+    public TriageResultDto triageTicket(String conversationId, String ticketId, String issueDescription) {
+        log.info("Triaging ticket ID: {}", ticketId);
+        return chatClient.prompt()
+                .user(String.format(
+                    "Classify the following customer support ticket into one of these categories: shipping, refund, warranty, billing, account_security, general. " +
+                    "Assign a priority: low, medium, high, urgent. " +
+                    "Determine if immediate human escalation is needed. " +
+                    "Ticket ID: %s\nIssue: %s", ticketId, issueDescription))
+                .advisors(spec -> spec.param("chat_memory_conversation_id", conversationId))
+                .call()
+                .entity(TriageResultDto.class);
     }
 
     @Transactional
     public TicketEvaluationResultDto evaluateAndPersistTicket(String conversationId, String ticketId, String issueDescription) {
 
-        // 1. Evaluate with Gemini + PgVector
+        AITraceEntity trace = AITraceEntity.builder()
+                .ticketId(ticketId)
+                .timestamp(LocalDateTime.now())
+                .build();
+
+        // 1. Guardrail Check - Input
+        if (guardrailService.checkPromptInjection(issueDescription)) {
+            log.error("🚨 Security violation: Prompt injection detected for ticket [{}]", ticketId);
+            trace.setGuardrailResult("BLOCKED: Prompt Injection");
+            trace.setFinalStatus("BLOCKED");
+            traceRepository.save(trace);
+            throw new SecurityException("Prompt injection detected. Request blocked.");
+        }
+        if (guardrailService.containsPII(issueDescription)) {
+            log.error("🚨 Security violation: PII detected for ticket [{}]", ticketId);
+            trace.setGuardrailResult("BLOCKED: PII Detected");
+            trace.setFinalStatus("BLOCKED");
+            traceRepository.save(trace);
+            throw new SecurityException("Sensitive PII detected in input. Request blocked.");
+        }
+        trace.setGuardrailResult("PASSED");
+
+        // 2. Evaluate with Gemini + PgVector
         TicketEvaluationResultDto result = chatClient.prompt()
-                .user(String.format("Ticket ID: %s\nIssue: %s", ticketId, issueDescription))
+                .user(String.format(
+                    "Ticket ID: %s\nIssue: %s\n\n" +
+                    "Evaluate this ticket based on retrieved policies. " +
+                    "Generate a professional customer-facing reply. " +
+                    "CRITICAL: For every claim made in the reply, you MUST include a citation ID from the provided policy documents in the format [KB-XXXX]. " +
+                    "If no document supports a claim, do not cite it.",
+                    ticketId, issueDescription))
                 .advisors(spec -> spec.param("chat_memory_conversation_id", conversationId))
                 .call()
                 .entity(TicketEvaluationResultDto.class);
 
-        // 2. Map to Entity & Determine Initial Status
+        // 3. Guardrail Check - Output
+        if (result != null && result.getDraftReply() != null && guardrailService.hasForbiddenPromises(result.getDraftReply())) {
+            log.warn("⚠️ Guardrail violation: AI promised prohibited action for ticket [{}]", ticketId);
+            trace.setGuardrailResult("FLAGGED: Forbidden Promise");
+            // We don't block the entire response but flag it for mandatory human review
+            result.setRequiresHumanApproval(true);
+            result.setReasoning(result.getReasoning() + " [GUARDRAIL: AI made a forbidden promise in the draft]");
+        }
+
+        // 4. Handle Adversarial Documents
+        if (result != null && result.getCitedPolicyDoc() != null && result.getCitedPolicyDoc().contains("KB-ADVERSARIAL-001")) {
+            log.warn("⚠️ Adversarial document KB-ADVERSARIAL-001 cited in ticket [{}]", ticketId);
+            trace.setGuardrailResult("FLAGGED: Adversarial Doc");
+        }
+
+        // 5. Map to Entity & Determine Initial Status
         TicketEvaluationEntity entity = new TicketEvaluationEntity();
 
         entity.setTicketId(Objects.requireNonNull(result).getTicketId());
@@ -110,6 +178,7 @@ public class TicketAgentService {
         entity.setReasoning(result.getReasoning());
         entity.setRequiresHumanApproval(result.isRequiresHumanApproval());
         entity.setCitedPolicyDoc(result.getCitedPolicyDoc());
+        entity.setDraftReply(result.getDraftReply());
         entity.setCreatedAt(LocalDateTime.now());
 
         if (result.isRequiresHumanApproval()) {
@@ -122,6 +191,12 @@ public class TicketAgentService {
         }
 
         ticketRepository.save(entity);
+
+        // 6. Complete Trace
+        trace.setFinalStatus(entity.getStatus().name());
+        trace.setRetrievedDocIds(result.getCitedPolicyDoc());
+        traceRepository.save(trace);
+
         return result;
     }
 

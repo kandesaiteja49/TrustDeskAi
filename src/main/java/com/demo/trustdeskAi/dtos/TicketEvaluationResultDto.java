@@ -7,6 +7,8 @@ public class TicketEvaluationResultDto {
     private String reasoning;
     private boolean requiresHumanApproval;
     private String citedPolicyDoc;
+    private String draftReply;
+
 
     // Default constructor
     public TicketEvaluationResultDto() {}
@@ -27,6 +29,7 @@ public class TicketEvaluationResultDto {
     public String getTicketId() {
         return ticketId;
     }
+
 
     public void setTicketId(String ticketId) {
         this.ticketId = ticketId;
@@ -68,7 +71,11 @@ public class TicketEvaluationResultDto {
         return citedPolicyDoc;
     }
 
-    public void setCitedPolicyDoc(String citedPolicyDoc) {
-        this.citedPolicyDoc = citedPolicyDoc;
+    public String getDraftReply() {
+        return draftReply;
+    }
+
+    public void setDraftReply(String draftReply) {
+        this.draftReply = draftReply;
     }
 }

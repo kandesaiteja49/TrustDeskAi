@@ -21,6 +21,7 @@ An AI-powered support ticket evaluation system that automates the analysis of cu
 - **Vector Store**: PostgreSQL with `pgvector` extension
 - **Language**: Java 17+
 - **Build Tool**: Maven
+- **Frontend**: HTML5, Tailwind CSS, JavaScript (Vanilla)
 
 ---
 
@@ -46,7 +47,7 @@ An AI-powered support ticket evaluation system that automates the analysis of cu
    spring.datasource.url=jdbc:postgresql://localhost:5434/postgres
    spring.datasource.username=postgres
    spring.datasource.password=password
-   
+
    gemini.api.key=YOUR_GOOGLE_GEMINI_API_KEY
    ```
 
@@ -54,6 +55,19 @@ An AI-powered support ticket evaluation system that automates the analysis of cu
    ```bash
    mvn spring-boot:run
    ```
+
+---
+
+## 💻 User Interface
+
+Once the application is running, you can access the Operator Dashboard:
+**URL**: `http://localhost:8083/api/v1/index.html`
+
+**Key Features of the UI**:
+- **Triage**: Quickly classify tickets by category and priority.
+- **Evaluation**: Generate a grounded AI decision with inline citations `[KB-XXXX]`.
+- **Approval**: Submit human review decisions with idempotency protection.
+- **Monitoring**: View all pending approvals in one place.
 
 ---
 
@@ -70,15 +84,18 @@ An AI-powered support ticket evaluation system that automates the analysis of cu
 ### AI Ticket Agent
 | Endpoint | Method | Description | Request Body | Headers |
 | :--- | :--- | :--- | :--- | :--- |
+| `/agent/triage` | `POST` | Classifies ticket category & priority | `TicketRequestDto` | `application/json` |
 | `/agent/ingest-policies` | `POST` | Ingests Markdown policies into vector store | None | N/A |
 | `/agent/evaluate-ticket` | `POST` | Evaluates a ticket using AI | `TicketRequestDto` | `X-Conversation-Id`, `application/json` |
 | `/agent/pending-approvals` | `GET` | Lists all tickets awaiting human review | None | N/A |
 | `/agent/pending-approvals/user` | `GET` | Lists pending tickets for a specific user | None | `X-Conversation-Id` |
 | `/agent/tickets/{ticketId}/human-review` | `POST` | Submits a human decision | `HumanReviewRequestDto` | `application/json` |
+| `/agent/evaluate/run` | `GET` | Runs evaluation report against `.jsonl` cases | `filePath` (query param) | N/A |
 
 ### Request Schemas
 - **`TicketRequestDto`**: `{ "ticketId": "TKT-123", "issueDescription": "..." }`
-- **`HumanReviewRequestDto`**: `{ "approved": true, "overrideDecision": "...", "reviewerNotes": "..." }`
+- **`HumanReviewRequestDto`**: `{ "approved": true, "overrideDecision": "...", "reviewerNotes": "...", "idempotencyKey": "unique-id" }`
+- **`TriageResultDto`**: `{ "category": "refund", "priority": "high", "escalationNeeded": true }`
 
 ---
 
@@ -103,5 +120,6 @@ This script will sequentially seed data, ingest policies, evaluate a sample tick
 - `src/main/java`: Java source code (Controllers, Services, Entities).
 - `src/main/resources/policies`: Markdown files containing company policies for RAG.
 - `src/main/resources/guardrails`: System prompts and guardrails for the AI agent.
+- `src/main/resources/static`: Frontend dashboard files.
 - `scripts`: Shell scripts for API testing and environment setup.
 - `docker-compose.yaml`: Docker configuration for the infrastructure.
