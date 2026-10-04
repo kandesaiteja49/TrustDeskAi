@@ -13,6 +13,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+// it is an ai configuration class that sets up the chat client and initializes the PostgreSQL vector extension
 @Configuration
 public class AgentConfig {
 
