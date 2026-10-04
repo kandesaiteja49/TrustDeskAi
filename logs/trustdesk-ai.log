@@ -7113,3 +7113,461 @@ Caused by: java.lang.IllegalStateException: Incomplete Google GenAI configuratio
 	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:155) ~[spring-beans-7.0.9.jar:7.0.9]
 	... 92 common frames omitted
 
+2026-10-04T22:26:58.100+05:30  INFO 24224 --- [trustdeskAi] [main] c.d.t.TrustdeskAiApplicationTests        : Starting TrustdeskAiApplicationTests using Java 21.0.9 with PID 24224 (started by sai teja in C:\PROJECT\trustdeskAi)
+2026-10-04T22:26:58.102+05:30  INFO 24224 --- [trustdeskAi] [main] c.d.t.TrustdeskAiApplicationTests        : No active profile set, falling back to 1 default profile: "default"
+2026-10-04T22:26:59.049+05:30  WARN 24224 --- [trustdeskAi] [main] o.s.w.c.s.GenericWebApplicationContext   : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Cannot register bean definition [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=org.springframework.ai.model.transformers.autoconfigure.TransformersEmbeddingModelAutoConfiguration; factoryMethodName=embeddingModel; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]] for bean 'embeddingModel' since there is already [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=jacksonConfig; factoryMethodName=embeddingModel; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/demo/trustdeskAi/config/JacksonConfig.class]] bound.
+2026-10-04T22:26:59.071+05:30  INFO 24224 --- [trustdeskAi] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-04T22:26:59.103+05:30 ERROR 24224 --- [trustdeskAi] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'embeddingModel', defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class], could not be registered. A bean with that name has already been defined in class path resource [com/demo/trustdeskAi/config/JacksonConfig.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2026-10-04T22:26:59.110+05:30  WARN 24224 --- [trustdeskAi] [main] o.s.test.context.TestContextManager      : Caught exception while allowing TestExecutionListener [org.springframework.test.context.web.ServletTestExecutionListener] to prepare test instance [com.demo.trustdeskAi.TrustdeskAiApplicationTests@12d40609]
+
+java.lang.IllegalStateException: Failed to load ApplicationContext for [WebMergedContextConfiguration@7fb8bad0 testClass = com.demo.trustdeskAi.TrustdeskAiApplicationTests, locations = [], classes = [com.demo.trustdeskAi.TrustdeskAiApplication], contextInitializerClasses = [], activeProfiles = [], propertySourceDescriptors = [], propertySourceProperties = ["org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true"], contextCustomizers = [org.springframework.boot.test.context.PropertyMappingContextCustomizer@0, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@33352f32, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@2b62442c, org.springframework.boot.test.autoconfigure.OnFailureConditionReportContextCustomizerFactory$OnFailureConditionReportContextCustomizer@27a5328c, org.springframework.test.context.support.DynamicPropertiesContextCustomizer@0, org.springframework.boot.micrometer.metrics.test.autoconfigure.MetricsContextCustomizerFactory$DisableMetricsExportContextCustomizer@1f, org.springframework.boot.webmvc.test.autoconfigure.WebDriverContextCustomizer@2f7a7219, org.springframework.boot.web.server.context.SpringBootTestRandomPortContextCustomizer@4a8a60bc, org.springframework.boot.test.context.SpringBootTestAnnotation@6b85bb11], resourceBasePath = "src/main/webapp", contextLoader = org.springframework.boot.test.context.SpringBootContextLoader, parent = null]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:195) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.springframework.test.context.cache.DefaultContextCache.put(DefaultContextCache.java:214) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContext(DefaultCacheAwareContextLoaderDelegate.java:160) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.springframework.test.context.support.DefaultTestContext.getApplicationContext(DefaultTestContext.java:128) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.springframework.test.context.web.ServletTestExecutionListener.setUpRequestContextIfNecessary(ServletTestExecutionListener.java:200) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.springframework.test.context.web.ServletTestExecutionListener.prepareTestInstance(ServletTestExecutionListener.java:139) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.springframework.test.context.TestContextManager.prepareTestInstance(TestContextManager.java:260) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.springframework.test.context.junit.jupiter.SpringExtension.postProcessTestInstance(SpringExtension.java:242) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$1(ClassBasedTestDescriptor.java:423) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.executeAndMaskThrowable(ClassBasedTestDescriptor.java:428) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$invokeTestInstancePostProcessors$0(ClassBasedTestDescriptor.java:422) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:184) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$2$1.accept(ReferencePipeline.java:179) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:197) ~[na:na]
+	at java.base/java.util.ArrayList$ArrayListSpliterator.forEachRemaining(ArrayList.java:1708) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:509) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:151) ~[na:na]
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:174) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:596) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.invokeTestInstancePostProcessors(ClassBasedTestDescriptor.java:422) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$instantiateAndPostProcessTestInstance$0(ClassBasedTestDescriptor.java:334) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.instantiateAndPostProcessTestInstance(ClassBasedTestDescriptor.java:333) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$1(ClassBasedTestDescriptor.java:322) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.Optional.orElseGet(Optional.java:364) ~[na:na]
+	at org.junit.jupiter.engine.descriptor.ClassBasedTestDescriptor.lambda$testInstancesProvider$0(ClassBasedTestDescriptor.java:321) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.execution.TestInstancesProvider.getTestInstances(TestInstancesProvider.java:27) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.lambda$prepare$0(TestMethodTestDescriptor.java:127) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:126) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.jupiter.engine.descriptor.TestMethodTestDescriptor.prepare(TestMethodTestDescriptor.java:70) ~[junit-jupiter-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$prepare$0(NodeTestTask.java:144) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.prepare(NodeTestTask.java:144) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:110) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.invokeAll(SameThreadHierarchicalTestExecutorService.java:42) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$2(NodeTestTask.java:180) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$1(NodeTestTask.java:166) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.Node.around(Node.java:138) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.lambda$executeRecursively$0(NodeTestTask.java:164) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.ThrowableCollector.execute(ThrowableCollector.java:74) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.executeRecursively(NodeTestTask.java:163) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.NodeTestTask.execute(NodeTestTask.java:116) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.SameThreadHierarchicalTestExecutorService.submit(SameThreadHierarchicalTestExecutorService.java:36) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestExecutor.execute(HierarchicalTestExecutor.java:52) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.engine.support.hierarchical.HierarchicalTestEngine.execute(HierarchicalTestEngine.java:58) ~[junit-platform-engine-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.executeEngine(EngineExecutionOrchestrator.java:246) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.failOrExecuteEngine(EngineExecutionOrchestrator.java:218) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:179) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:66) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:157) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:65) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:125) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:114) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.lambda$execute$2(InterceptingLauncher.java:57) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.ClasspathAlignmentCheckingLauncherInterceptor.intercept(ClasspathAlignmentCheckingLauncherInterceptor.java:25) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.InterceptingLauncher.execute(InterceptingLauncher.java:56) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at org.junit.platform.launcher.core.DelegatingLauncher.execute(DelegatingLauncher.java:58) ~[junit-platform-launcher-6.0.3.jar:6.0.3]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.apache.maven.surefire.api.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:125) ~[surefire-api-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.executeWithCancellationToken(LauncherAdapter.java:68) ~[surefire-junit-platform-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.junitplatform.LauncherAdapter.execute(LauncherAdapter.java:54) ~[surefire-junit-platform-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.execute(JUnitPlatformProvider.java:203) ~[surefire-junit-platform-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invokeAllTests(JUnitPlatformProvider.java:168) ~[surefire-junit-platform-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.junitplatform.JUnitPlatformProvider.invoke(JUnitPlatformProvider.java:136) ~[surefire-junit-platform-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:385) ~[surefire-booter-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.booter.ForkedBooter.execute(ForkedBooter.java:162) ~[surefire-booter-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.booter.ForkedBooter.run(ForkedBooter.java:507) ~[surefire-booter-3.5.6.jar:3.5.6]
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:495) ~[surefire-booter-3.5.6.jar:3.5.6]
+Caused by: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Cannot register bean definition [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=org.springframework.ai.model.transformers.autoconfigure.TransformersEmbeddingModelAutoConfiguration; factoryMethodName=embeddingModel; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]] for bean 'embeddingModel' since there is already [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=jacksonConfig; factoryMethodName=embeddingModel; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/demo/trustdeskAi/config/JacksonConfig.class]] bound.
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.registerBeanDefinition(DefaultListableBeanFactory.java:1271) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForBeanMethod(ConfigurationClassBeanDefinitionReader.java:309) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitionsForConfigurationClass(ConfigurationClassBeanDefinitionReader.java:148) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.annotation.ConfigurationClassBeanDefinitionReader.loadBeanDefinitions(ConfigurationClassBeanDefinitionReader.java:124) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.processConfigBeanDefinitions(ConfigurationClassPostProcessor.java:464) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.annotation.ConfigurationClassPostProcessor.postProcessBeanDefinitionRegistry(ConfigurationClassPostProcessor.java:316) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanDefinitionRegistryPostProcessors(PostProcessorRegistrationDelegate.java:349) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.support.PostProcessorRegistrationDelegate.invokeBeanFactoryPostProcessors(PostProcessorRegistrationDelegate.java:118) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:795) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:603) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.1.1.jar:4.1.1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.1.1.jar:4.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.1.1.jar:4.1.1]
+	at org.springframework.boot.test.context.SpringBootContextLoader.lambda$loadContext$2(SpringBootContextLoader.java:155) ~[spring-boot-test-4.1.1.jar:4.1.1]
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:58) ~[spring-core-7.0.9.jar:7.0.9]
+	at org.springframework.util.function.ThrowingSupplier.get(ThrowingSupplier.java:46) ~[spring-core-7.0.9.jar:7.0.9]
+	at org.springframework.boot.SpringApplication.withHook(SpringApplication.java:1465) ~[spring-boot-4.1.1.jar:4.1.1]
+	at org.springframework.boot.test.context.SpringBootContextLoader$ContextLoaderHook.run(SpringBootContextLoader.java:600) ~[spring-boot-test-4.1.1.jar:4.1.1]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:155) ~[spring-boot-test-4.1.1.jar:4.1.1]
+	at org.springframework.boot.test.context.SpringBootContextLoader.loadContext(SpringBootContextLoader.java:114) ~[spring-boot-test-4.1.1.jar:4.1.1]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.loadContextInternal(DefaultCacheAwareContextLoaderDelegate.java:247) ~[spring-test-7.0.9.jar:7.0.9]
+	at org.springframework.test.context.cache.DefaultCacheAwareContextLoaderDelegate.lambda$loadContext$0(DefaultCacheAwareContextLoaderDelegate.java:167) ~[spring-test-7.0.9.jar:7.0.9]
+	... 86 common frames omitted
+
+2026-10-04T22:30:03.520+05:30  INFO 33960 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : Starting TrustdeskAiApplication using Java 21.0.9 with PID 33960 (C:\PROJECT\trustdeskAi\target\classes started by sai teja in C:\PROJECT\trustdeskAi)
+2026-10-04T22:30:03.524+05:30  INFO 33960 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-10-04T22:30:04.299+05:30  WARN 33960 --- [trustdeskAi] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Cannot register bean definition [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=org.springframework.ai.model.transformers.autoconfigure.TransformersEmbeddingModelAutoConfiguration; factoryMethodName=embeddingModel; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]] for bean 'embeddingModel' since there is already [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=jacksonConfig; factoryMethodName=embeddingModel; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/demo/trustdeskAi/config/JacksonConfig.class]] bound.
+2026-10-04T22:30:04.307+05:30  INFO 33960 --- [trustdeskAi] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-04T22:30:04.325+05:30 ERROR 33960 --- [trustdeskAi] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'embeddingModel', defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class], could not be registered. A bean with that name has already been defined in class path resource [com/demo/trustdeskAi/config/JacksonConfig.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2026-10-04T22:37:56.391+05:30  INFO 32324 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : Starting TrustdeskAiApplication using Java 21.0.9 with PID 32324 (C:\PROJECT\trustdeskAi\target\classes started by sai teja in C:\PROJECT\trustdeskAi)
+2026-10-04T22:37:56.394+05:30  INFO 32324 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-10-04T22:37:57.252+05:30  WARN 32324 --- [trustdeskAi] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.support.BeanDefinitionOverrideException: Invalid bean definition with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Cannot register bean definition [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=org.springframework.ai.model.transformers.autoconfigure.TransformersEmbeddingModelAutoConfiguration; factoryMethodName=embeddingModel; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]] for bean 'embeddingModel' since there is already [Root bean: class=null; scope=; abstract=false; lazyInit=null; autowireMode=3; dependencyCheck=0; autowireCandidate=true; primary=false; fallback=false; factoryBeanName=jacksonConfig; factoryMethodName=embeddingModel; initMethodNames=null; destroyMethodNames=[(inferred)]; defined in class path resource [com/demo/trustdeskAi/config/JacksonConfig.class]] bound.
+2026-10-04T22:37:57.258+05:30  INFO 32324 --- [trustdeskAi] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-04T22:37:57.282+05:30 ERROR 32324 --- [trustdeskAi] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The bean 'embeddingModel', defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class], could not be registered. A bean with that name has already been defined in class path resource [com/demo/trustdeskAi/config/JacksonConfig.class] and overriding is disabled.
+
+Action:
+
+Consider renaming one of the beans or enabling overriding by setting spring.main.allow-bean-definition-overriding=true
+
+2026-10-04T22:40:31.634+05:30  INFO 34948 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : Starting TrustdeskAiApplication using Java 21.0.9 with PID 34948 (C:\PROJECT\trustdeskAi\target\classes started by sai teja in C:\PROJECT\trustdeskAi)
+2026-10-04T22:40:31.637+05:30  INFO 34948 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-10-04T22:40:32.558+05:30  INFO 34948 --- [trustdeskAi] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-04T22:40:32.801+05:30  INFO 34948 --- [trustdeskAi] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 224 ms. Found 3 JPA repository interfaces.
+2026-10-04T22:40:33.558+05:30  INFO 34948 --- [trustdeskAi] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+2026-10-04T22:40:33.583+05:30  INFO 34948 --- [trustdeskAi] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-04T22:40:33.584+05:30  INFO 34948 --- [trustdeskAi] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-04T22:40:33.671+05:30  INFO 34948 --- [trustdeskAi] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1984 ms
+2026-10-04T22:40:34.002+05:30  INFO 34948 --- [trustdeskAi] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-04T22:40:34.102+05:30  INFO 34948 --- [trustdeskAi] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-04T22:40:34.666+05:30  INFO 34948 --- [trustdeskAi] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-04T22:40:34.710+05:30  INFO 34948 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-04T22:40:34.966+05:30  INFO 34948 --- [trustdeskAi] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@67a3394c
+2026-10-04T22:40:34.969+05:30  INFO 34948 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-04T22:40:35.159+05:30  INFO 34948 --- [trustdeskAi] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5434/trustdesk]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: trustdesk/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-04T22:40:36.721+05:30  INFO 34948 --- [trustdeskAi] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-04T22:40:36.889+05:30  INFO 34948 --- [trustdeskAi] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-04T22:40:37.019+05:30  INFO 34948 --- [trustdeskAi] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-04T22:40:47.452+05:30  WARN 34948 --- [trustdeskAi] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'ticketAgentController' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\controllers\TicketAgentController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'markdownIngestionService' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\service\MarkdownIngestionService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'vectorStore' defined in class path resource [org/springframework/ai/vectorstore/pgvector/autoconfigure/PgVectorStoreAutoConfiguration.class]: Unsatisfied dependency expressed through method 'vectorStore' parameter 1: Error creating bean with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Failed to instantiate [org.springframework.ai.transformers.TransformersEmbeddingModel]: Factory method 'embeddingModel' threw exception with message: C:\Users\sai teja\AppData\Local\Temp\onnxruntime-java11037886643835826176\onnxruntime.dll: A dynamic link library (DLL) initialization routine failed
+2026-10-04T22:40:47.452+05:30  INFO 34948 --- [trustdeskAi] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-04T22:40:47.495+05:30  INFO 34948 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-04T22:40:47.511+05:30  INFO 34948 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-04T22:40:47.518+05:30  INFO 34948 --- [trustdeskAi] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-10-04T22:40:47.544+05:30  INFO 34948 --- [trustdeskAi] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-04T22:40:47.560+05:30 ERROR 34948 --- [trustdeskAi] [main] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'ticketAgentController' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\controllers\TicketAgentController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'markdownIngestionService' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\service\MarkdownIngestionService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'vectorStore' defined in class path resource [org/springframework/ai/vectorstore/pgvector/autoconfigure/PgVectorStoreAutoConfiguration.class]: Unsatisfied dependency expressed through method 'vectorStore' parameter 1: Error creating bean with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Failed to instantiate [org.springframework.ai.transformers.TransformersEmbeddingModel]: Factory method 'embeddingModel' threw exception with message: C:\Users\sai teja\AppData\Local\Temp\onnxruntime-java11037886643835826176\onnxruntime.dll: A dynamic link library (DLL) initialization routine failed
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1380) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:196) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.instantiateSingleton(DefaultListableBeanFactory.java:1225) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingleton(DefaultListableBeanFactory.java:1191) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:1121) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:994) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:621) ~[spring-context-7.0.9.jar:7.0.9]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.1.1.jar:4.1.1]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:756) ~[spring-boot-4.1.1.jar:4.1.1]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:445) ~[spring-boot-4.1.1.jar:4.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.1.1.jar:4.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1365) ~[spring-boot-4.1.1.jar:4.1.1]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1354) ~[spring-boot-4.1.1.jar:4.1.1]
+	at com.demo.trustdeskAi.TrustdeskAiApplication.main(TrustdeskAiApplication.java:10) ~[classes/:na]
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'markdownIngestionService' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\service\MarkdownIngestionService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'vectorStore' defined in class path resource [org/springframework/ai/vectorstore/pgvector/autoconfigure/PgVectorStoreAutoConfiguration.class]: Unsatisfied dependency expressed through method 'vectorStore' parameter 1: Error creating bean with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Failed to instantiate [org.springframework.ai.transformers.TransformersEmbeddingModel]: Factory method 'embeddingModel' threw exception with message: C:\Users\sai teja\AppData\Local\Temp\onnxruntime-java11037886643835826176\onnxruntime.dll: A dynamic link library (DLL) initialization routine failed
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:240) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1380) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1219) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:229) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1769) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.9.jar:7.0.9]
+	... 21 common frames omitted
+Caused by: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'vectorStore' defined in class path resource [org/springframework/ai/vectorstore/pgvector/autoconfigure/PgVectorStoreAutoConfiguration.class]: Unsatisfied dependency expressed through method 'vectorStore' parameter 1: Error creating bean with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Failed to instantiate [org.springframework.ai.transformers.TransformersEmbeddingModel]: Factory method 'embeddingModel' threw exception with message: C:\Users\sai teja\AppData\Local\Temp\onnxruntime-java11037886643835826176\onnxruntime.dll: A dynamic link library (DLL) initialization routine failed
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:804) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:546) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1360) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1232) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1711) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.9.jar:7.0.9]
+	... 35 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'embeddingModel' defined in class path resource [org/springframework/ai/model/transformers/autoconfigure/TransformersEmbeddingModelAutoConfiguration.class]: Failed to instantiate [org.springframework.ai.transformers.TransformersEmbeddingModel]: Factory method 'embeddingModel' threw exception with message: C:\Users\sai teja\AppData\Local\Temp\onnxruntime-java11037886643835826176\onnxruntime.dll: A dynamic link library (DLL) initialization routine failed
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:657) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiateUsingFactoryMethod(ConstructorResolver.java:645) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateUsingFactoryMethod(AbstractAutowireCapableBeanFactory.java:1360) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1192) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveBean(DefaultListableBeanFactory.java:1232) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1711) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1658) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:912) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-7.0.9.jar:7.0.9]
+	... 49 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [org.springframework.ai.transformers.TransformersEmbeddingModel]: Factory method 'embeddingModel' threw exception with message: C:\Users\sai teja\AppData\Local\Temp\onnxruntime-java11037886643835826176\onnxruntime.dll: A dynamic link library (DLL) initialization routine failed
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:183) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiateWithFactoryMethod(SimpleInstantiationStrategy.java:72) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:152) ~[spring-beans-7.0.9.jar:7.0.9]
+	at org.springframework.beans.factory.support.ConstructorResolver.instantiate(ConstructorResolver.java:653) ~[spring-beans-7.0.9.jar:7.0.9]
+	... 63 common frames omitted
+Caused by: java.lang.UnsatisfiedLinkError: C:\Users\sai teja\AppData\Local\Temp\onnxruntime-java11037886643835826176\onnxruntime.dll: A dynamic link library (DLL) initialization routine failed
+	at java.base/jdk.internal.loader.NativeLibraries.load(Native Method) ~[na:na]
+	at java.base/jdk.internal.loader.NativeLibraries$NativeLibraryImpl.open(NativeLibraries.java:331) ~[na:na]
+	at java.base/jdk.internal.loader.NativeLibraries.loadLibrary(NativeLibraries.java:197) ~[na:na]
+	at java.base/jdk.internal.loader.NativeLibraries.loadLibrary(NativeLibraries.java:139) ~[na:na]
+	at java.base/java.lang.ClassLoader.loadLibrary(ClassLoader.java:2418) ~[na:na]
+	at java.base/java.lang.Runtime.load0(Runtime.java:852) ~[na:na]
+	at java.base/java.lang.System.load(System.java:2025) ~[na:na]
+	at ai.onnxruntime.OnnxRuntime.load(OnnxRuntime.java:387) ~[onnxruntime-1.21.1.jar:1.21.1]
+	at ai.onnxruntime.OnnxRuntime.init(OnnxRuntime.java:166) ~[onnxruntime-1.21.1.jar:1.21.1]
+	at ai.onnxruntime.OrtEnvironment.<clinit>(OrtEnvironment.java:34) ~[onnxruntime-1.21.1.jar:1.21.1]
+	at org.springframework.ai.transformers.TransformersEmbeddingModel.<init>(TransformersEmbeddingModel.java:131) ~[spring-ai-transformers-2.0.1.jar:2.0.1]
+	at org.springframework.ai.model.transformers.autoconfigure.TransformersEmbeddingModelAutoConfiguration.embeddingModel(TransformersEmbeddingModelAutoConfiguration.java:54) ~[spring-ai-autoconfigure-model-transformers-2.0.1.jar:2.0.1]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[na:na]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.lambda$instantiate$0(SimpleInstantiationStrategy.java:155) ~[spring-beans-7.0.9.jar:7.0.9]
+	... 66 common frames omitted
+
+2026-10-04T22:43:17.797+05:30  INFO 33004 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : Starting TrustdeskAiApplication using Java 21.0.9 with PID 33004 (C:\PROJECT\trustdeskAi\target\classes started by sai teja in C:\PROJECT\trustdeskAi)
+2026-10-04T22:43:17.800+05:30  INFO 33004 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-10-04T22:43:18.784+05:30  INFO 33004 --- [trustdeskAi] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-04T22:43:18.955+05:30  INFO 33004 --- [trustdeskAi] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 154 ms. Found 3 JPA repository interfaces.
+2026-10-04T22:43:19.635+05:30  INFO 33004 --- [trustdeskAi] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+2026-10-04T22:43:19.652+05:30  INFO 33004 --- [trustdeskAi] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-04T22:43:19.652+05:30  INFO 33004 --- [trustdeskAi] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-04T22:43:19.726+05:30  INFO 33004 --- [trustdeskAi] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1877 ms
+2026-10-04T22:43:20.030+05:30  INFO 33004 --- [trustdeskAi] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-04T22:43:20.097+05:30  INFO 33004 --- [trustdeskAi] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-04T22:43:20.634+05:30  INFO 33004 --- [trustdeskAi] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-04T22:43:20.670+05:30  INFO 33004 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-04T22:43:20.882+05:30  INFO 33004 --- [trustdeskAi] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1f6d7e7c
+2026-10-04T22:43:20.883+05:30  INFO 33004 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-04T22:43:20.969+05:30  INFO 33004 --- [trustdeskAi] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5434/trustdesk]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: trustdesk/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-04T22:43:22.288+05:30  INFO 33004 --- [trustdeskAi] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-04T22:43:22.382+05:30  INFO 33004 --- [trustdeskAi] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-04T22:43:22.462+05:30  INFO 33004 --- [trustdeskAi] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-04T22:43:22.739+05:30  WARN 33004 --- [trustdeskAi] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'ticketAgentController' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\controllers\TicketAgentController.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'markdownIngestionService' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\service\MarkdownIngestionService.class]: Unsatisfied dependency expressed through constructor parameter 0: Error creating bean with name 'vectorStore' defined in class path resource [org/springframework/ai/vectorstore/pgvector/autoconfigure/PgVectorStoreAutoConfiguration.class]: Unsatisfied dependency expressed through method 'vectorStore' parameter 1: No qualifying bean of type 'org.springframework.ai.embedding.EmbeddingModel' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2026-10-04T22:43:22.740+05:30  INFO 33004 --- [trustdeskAi] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-04T22:43:22.761+05:30  INFO 33004 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-04T22:43:22.775+05:30  INFO 33004 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-04T22:43:22.781+05:30  INFO 33004 --- [trustdeskAi] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-10-04T22:43:22.793+05:30  INFO 33004 --- [trustdeskAi] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-04T22:43:22.813+05:30 ERROR 33004 --- [trustdeskAi] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 1 of method vectorStore in org.springframework.ai.vectorstore.pgvector.autoconfigure.PgVectorStoreAutoConfiguration required a bean of type 'org.springframework.ai.embedding.EmbeddingModel' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.ai.embedding.EmbeddingModel' in your configuration.
+
+2026-10-04T22:52:38.966+05:30  INFO 35068 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : Starting TrustdeskAiApplication using Java 21.0.9 with PID 35068 (C:\PROJECT\trustdeskAi\target\classes started by sai teja in C:\PROJECT\trustdeskAi)
+2026-10-04T22:52:38.970+05:30  INFO 35068 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-10-04T22:52:39.880+05:30  INFO 35068 --- [trustdeskAi] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-04T22:52:40.058+05:30  INFO 35068 --- [trustdeskAi] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 169 ms. Found 3 JPA repository interfaces.
+2026-10-04T22:52:40.754+05:30  INFO 35068 --- [trustdeskAi] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+2026-10-04T22:52:40.773+05:30  INFO 35068 --- [trustdeskAi] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-04T22:52:40.774+05:30  INFO 35068 --- [trustdeskAi] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-04T22:52:40.858+05:30  INFO 35068 --- [trustdeskAi] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1840 ms
+2026-10-04T22:52:41.165+05:30  INFO 35068 --- [trustdeskAi] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-04T22:52:41.217+05:30  INFO 35068 --- [trustdeskAi] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-04T22:52:41.769+05:30  INFO 35068 --- [trustdeskAi] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-04T22:52:41.821+05:30  INFO 35068 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-04T22:52:42.076+05:30  INFO 35068 --- [trustdeskAi] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4cb58e8b
+2026-10-04T22:52:42.078+05:30  INFO 35068 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-04T22:52:42.152+05:30  INFO 35068 --- [trustdeskAi] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5434/trustdesk]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: trustdesk/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-04T22:52:43.553+05:30  INFO 35068 --- [trustdeskAi] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-04T22:52:43.686+05:30  INFO 35068 --- [trustdeskAi] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-04T22:52:43.817+05:30  INFO 35068 --- [trustdeskAi] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-04T22:52:44.713+05:30  INFO 35068 --- [trustdeskAi] [main] o.s.a.v.pgvector.PgVectorStore           : Using the vector table name: vector_store. Is empty: false
+2026-10-04T22:52:44.716+05:30  INFO 35068 --- [trustdeskAi] [main] o.s.a.v.pgvector.PgVectorStore           : Initializing PGVectorStore schema for table: vector_store in schema: public
+2026-10-04T22:52:44.717+05:30  INFO 35068 --- [trustdeskAi] [main] o.s.a.v.pgvector.PgVectorStore           : vectorTableValidationsEnabled false
+2026-10-04T22:52:44.791+05:30 DEBUG 35068 --- [trustdeskAi] [main] o.s.a.m.t.a.ToolCallingAutoConfiguration : Cannot load class: org.springframework.security.oauth2.client.ClientAuthorizationException
+2026-10-04T22:52:45.070+05:30  WARN 35068 --- [trustdeskAi] [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'ticketAgentController' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\controllers\TicketAgentController.class]: Unsatisfied dependency expressed through constructor parameter 2: Error creating bean with name 'evaluationRunnerService' defined in file [C:\PROJECT\trustdeskAi\target\classes\com\demo\trustdeskAi\service\EvaluationRunnerService.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'com.fasterxml.jackson.databind.ObjectMapper' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2026-10-04T22:52:45.072+05:30  INFO 35068 --- [trustdeskAi] [main] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2026-10-04T22:52:45.087+05:30  INFO 35068 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2026-10-04T22:52:45.094+05:30  INFO 35068 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2026-10-04T22:52:45.106+05:30  INFO 35068 --- [trustdeskAi] [main] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2026-10-04T22:52:45.119+05:30  INFO 35068 --- [trustdeskAi] [main] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2026-10-04T22:52:45.142+05:30 ERROR 35068 --- [trustdeskAi] [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Parameter 1 of constructor in com.demo.trustdeskAi.service.EvaluationRunnerService required a bean of type 'com.fasterxml.jackson.databind.ObjectMapper' that could not be found.
+
+
+Action:
+
+Consider defining a bean of type 'com.fasterxml.jackson.databind.ObjectMapper' in your configuration.
+
+2026-10-04T22:59:01.545+05:30  INFO 27756 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : Starting TrustdeskAiApplication using Java 21.0.9 with PID 27756 (C:\PROJECT\trustdeskAi\target\classes started by sai teja in C:\PROJECT\trustdeskAi)
+2026-10-04T22:59:01.548+05:30  INFO 27756 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : No active profile set, falling back to 1 default profile: "default"
+2026-10-04T22:59:02.449+05:30  INFO 27756 --- [trustdeskAi] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-10-04T22:59:02.608+05:30  INFO 27756 --- [trustdeskAi] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 147 ms. Found 3 JPA repository interfaces.
+2026-10-04T22:59:03.355+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8083 (http)
+2026-10-04T22:59:03.376+05:30  INFO 27756 --- [trustdeskAi] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-10-04T22:59:03.376+05:30  INFO 27756 --- [trustdeskAi] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.24]
+2026-10-04T22:59:03.483+05:30  INFO 27756 --- [trustdeskAi] [main] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1886 ms
+2026-10-04T22:59:03.781+05:30  INFO 27756 --- [trustdeskAi] [main] org.hibernate.orm.jpa                    : HHH008540: Processing PersistenceUnitInfo [name: default]
+2026-10-04T22:59:03.840+05:30  INFO 27756 --- [trustdeskAi] [main] org.hibernate.orm.core                   : HHH000001: Hibernate ORM core version 7.4.5.Final
+2026-10-04T22:59:04.389+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-10-04T22:59:04.422+05:30  INFO 27756 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-10-04T22:59:04.668+05:30  INFO 27756 --- [trustdeskAi] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4cb58e8b
+2026-10-04T22:59:04.670+05:30  INFO 27756 --- [trustdeskAi] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-10-04T22:59:04.789+05:30  INFO 27756 --- [trustdeskAi] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://localhost:5434/trustdesk]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.15
+	Default catalog/schema: trustdesk/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DataSourceConnectionProvider
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-10-04T22:59:06.103+05:30  INFO 27756 --- [trustdeskAi] [main] org.hibernate.orm.core                   : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-10-04T22:59:06.257+05:30  INFO 27756 --- [trustdeskAi] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-10-04T22:59:06.342+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-10-04T22:59:07.233+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.a.v.pgvector.PgVectorStore           : Using the vector table name: vector_store. Is empty: false
+2026-10-04T22:59:07.238+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.a.v.pgvector.PgVectorStore           : Initializing PGVectorStore schema for table: vector_store in schema: public
+2026-10-04T22:59:07.238+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.a.v.pgvector.PgVectorStore           : vectorTableValidationsEnabled false
+2026-10-04T22:59:07.297+05:30 DEBUG 27756 --- [trustdeskAi] [main] o.s.a.m.t.a.ToolCallingAutoConfiguration : Cannot load class: org.springframework.security.oauth2.client.ClientAuthorizationException
+2026-10-04T22:59:07.671+05:30  WARN 27756 --- [trustdeskAi] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-10-04T22:59:07.705+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.b.w.a.WelcomePageHandlerMapping      : Adding welcome page: class path resource [static/index.html]
+2026-10-04T22:59:08.241+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-10-04T22:59:08.338+05:30  INFO 27756 --- [trustdeskAi] [main] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8083 (http) with context path '/'
+2026-10-04T22:59:08.347+05:30  INFO 27756 --- [trustdeskAi] [main] c.d.trustdeskAi.TrustdeskAiApplication   : Started TrustdeskAiApplication in 7.37 seconds (process running for 7.947)
